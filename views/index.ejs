@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MongoChats</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+    <form action="/chats/new" method="get">
+        <button>New Chat</button>
+    </form>
+    <br>
+    <h3>All chats..</h3>
+    <% for(let c of chats){ %>
+        <div class="chat">
+           <div class="from box">
+            <p>From : <%= c.from %>
+            </p>
+           </div> 
+            <div class="to-box">
+                <p>Recieved by : <%= c.to %>
+                </p>
+            </div>
+            <div class="msg-box">
+                <p>Message : <%= c.msg %>
+            </p>
+            <form action="/chats/<%= c._id %>/edit" method="get">
+                <button>Edit</button>
+            </form>
+            <br>
+            <form action="/chats/<%=c.id %>?_method=DELETE" method="POST">
+                <button>Delete</button>
+            </form>
+            </div>
+            <hr>
+            <p> <%= c.created_at.toString().split(" ")[4] %></p>
+            <br>
+            <p> <%= c.created_at.toString().split(" ").slice(0,4).join(" ") %></p>
+            
+        </div>
+        <% } %>
+</body>
+
+</html>
